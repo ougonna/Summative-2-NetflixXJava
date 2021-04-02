@@ -1,4 +1,4 @@
 package com.company.Summative2UgonnaBrownTaylorAbdul.dao;
 
-public class BookDaoTest {
+public class AuthorDaoJdbcTemplateImpl implements AuthorDao{
 }

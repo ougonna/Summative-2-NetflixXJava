@@ -1,4 +1,4 @@
-package com.company.Summative2UgonnaBrownTaylorAbdul.dao;
+package com.company.Summative2UgonnaBrownTaylorAbdul.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

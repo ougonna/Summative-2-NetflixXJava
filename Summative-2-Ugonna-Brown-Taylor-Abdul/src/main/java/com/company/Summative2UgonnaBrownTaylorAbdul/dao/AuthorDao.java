@@ -1,4 +1,5 @@
 package com.company.Summative2UgonnaBrownTaylorAbdul.dao;
 
-public class AuthorDaoTest {
+public interface AuthorDao {
+
 }
