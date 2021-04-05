@@ -2,10 +2,14 @@ package com.company.Summative2UgonnaBrownTaylorAbdul.dao;
 
 import com.company.Summative2UgonnaBrownTaylorAbdul.model.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class PublisherDayJdbcTemplateImpl implements PublisherDao{
@@ -34,26 +38,78 @@ public class PublisherDayJdbcTemplateImpl implements PublisherDao{
 
     @Override
     public Publisher addPublisher(Publisher publisher){
-        return null;
+
+        jdbcTemplate.update(
+                INSERT_PUBLISHER_SQL,
+                publisher.getName(),
+                publisher.getStreet(),
+                publisher.getCity(),
+                publisher.getState(),
+                publisher.getPostalCode(),
+                publisher.getPhone(),
+                publisher.getEmail());
+
+        int id = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
+
+        publisher.setId(id);
+
+        return publisher;
+
     }
 
     @Override
     public Publisher getPublisher(int id){
-        return null;
+
+        try {
+            return jdbcTemplate.queryForObject(
+                    SELECT_PUBLISHER_SQL,
+                    this::mapRowToPublisher,
+                    id);
+        } catch (EmptyResultDataAccessException e) {
+            // if there is no entry with the given id, just return null
+            return null;
+        }
     }
 
     @Override
     public List<Publisher> getAllPublishers(){
-        return null;
+
+        return jdbcTemplate.query(
+                SELECT_ALL_PUBLISHER_SQL,
+                this::mapRowToPublisher);
     }
 
     @Override
     public void updatePublisher(Publisher publisher){
 
+        jdbcTemplate.update(
+                UPDATE_PUBLISHER_SQL,
+                publisher.getName(),
+                publisher.getStreet(),
+                publisher.getCity(),
+                publisher.getState(),
+                publisher.getPostalCode(),
+                publisher.getPhone(),
+                publisher.getEmail());
     }
 
     @Override
     public void deletePublisher(int id){
 
+        jdbcTemplate.update(DELETE_PUBLISHER_SQL, id);
+    }
+
+    private Publisher mapRowToPublisher(ResultSet rs, int rowNum) throws SQLException {
+        Publisher publisher = new Publisher();
+        publisher.setId(rs.getInt("publisher_id"));
+        publisher.setName(rs.getString("name"));
+        publisher.setStreet(rs.getString("street"));
+        publisher.setCity(rs.getString("city"));
+        publisher.setState(rs.getString("state"));
+        publisher.setPostalCode(rs.getString("postal_code"));
+        publisher.setPhone(rs.getString("phone"));
+        publisher.setEmail(rs.getString("email"));
+
+        return publisher;
     }
 }
