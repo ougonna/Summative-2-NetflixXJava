@@ -33,7 +33,7 @@ public class BookDaoJdbcTemplateImpl implements BookDao
 
     }
 
-    public List <Book> getBooksByAuthor(int authorID)
+    public List <Book> getBooksByAuthor(String author)
     {
         return null;
     }
