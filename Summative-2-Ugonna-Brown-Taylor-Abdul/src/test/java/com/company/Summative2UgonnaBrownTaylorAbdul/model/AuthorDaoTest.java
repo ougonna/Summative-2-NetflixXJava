@@ -36,16 +36,16 @@ public class AuthorDaoTest {
             authorDao.deleteAuthor(a.getAuthorID());
         }
 
-        List<Publisher> pList = publisherDao.getAllPublishers();
-        for (Publisher p : pList) {
-            publisherDao.deletePublisher(p.getId());
-        }
-
-        List<Book> dList = bookDao.getAllBooks();
-
-        for (Book d : dList) {
-            bookDao.deleteBook(d.getBookID());
-        }
+//        List<Publisher> pList = publisherDao.getAllPublishers();
+//        for (Publisher p : pList) {
+//            publisherDao.deletePublisher(p.getId());
+//        }
+//
+//        List<Book> dList = bookDao.getAllBooks();
+//
+//        for (Book d : dList) {
+//            bookDao.deleteBook(d.getBookID());
+//        }
 
     }
 
@@ -135,16 +135,11 @@ public class AuthorDaoTest {
         //Act
         auth = authorDao.addAuthor(auth);
 
-        //Arrange
-        auth = new Author();
+
         auth.setFirstName("Update2Name");
         auth.setLastName("Update2Last");
         auth.setEmail("Updatelast2@gmail.com");
-        auth.setPhone("99927855467");
-        auth.setCity("Norfolk");
-        auth.setState("VA");
-        auth.setStreet("Update2 700 park ave");
-        auth.setPostalCode("32150");
+
 
         //Act
         authorDao.updateAuthor(auth); //updates db with new information

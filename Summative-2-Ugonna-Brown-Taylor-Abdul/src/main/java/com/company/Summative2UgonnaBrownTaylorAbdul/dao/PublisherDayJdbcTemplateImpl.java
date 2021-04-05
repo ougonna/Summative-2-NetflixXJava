@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,12 +32,13 @@ public class PublisherDayJdbcTemplateImpl implements PublisherDao{
             "update track set name = ?, street = ?, city = ?, state = ?, postal_code = ?, phone = ?, email = ?  where publisher_id = ?";
 
     private static final String DELETE_PUBLISHER_SQL =
-            "delete from track where publisher_id =  ?";
+            "delete from publisher where publisher_id =  ?";
 
     @Autowired
     public PublisherDayJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
+    @Transactional
     public Publisher addPublisher(Publisher publisher){
 
         jdbcTemplate.update(

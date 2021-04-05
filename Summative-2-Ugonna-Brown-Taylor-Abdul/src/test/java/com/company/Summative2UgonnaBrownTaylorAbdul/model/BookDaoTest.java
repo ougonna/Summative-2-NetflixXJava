@@ -35,21 +35,30 @@ public class BookDaoTest {
     public void setUp() throws Exception{
 
         //clean out the db
+        List<Book> dList = bookDao.getAllBooks();
+        for (Book d : dList){
+            bookDao.deleteBook(d.getBookID());
+        }
+
+        List<Publisher> pList = publisherDao.getAllPublishers();
+        for (Publisher p : pList){
+            publisherDao.deletePublisher(p.getId());
+        }
+
         List<Author> aList = authorDao.getAllAuthors();
         for(Author a : aList){
             authorDao.deleteAuthor(a.getAuthorID());
         }
 
-        List<Publisher> pList = publisherDao.getAllPublishers();
-        for(Publisher p : pList){
-            publisherDao.deletePublisher(p.getId());
-        }
 
-        List<Book> dList = bookDao.getAllBooks();
 
-        for (Book d : dList){
-            bookDao.deleteBook(d.getBookID());
-        }
+
+
+
+
+
+
+
 
     }
 
@@ -79,12 +88,13 @@ public class BookDaoTest {
         publisher = publisherDao.addPublisher(publisher);
 
         Book book = new Book();
-        book.setTitle("testBook");
         book.setIsbn("TEST6578");
-        book.setPrice(new BigDecimal("21.95"));
         book.setPublishDate(LocalDate.of(2010, 8, 5));
         book.setAuthorID(author.getAuthorID());
+        book.setTitle("testBook");
         book.setPublisherID(publisher.getId());
+        book.setPrice(new BigDecimal("21.95"));
+
         book = bookDao.addBook(book);
 
         Book book1 = bookDao.getBook(book.getBookID()); //creates another book
@@ -104,12 +114,12 @@ public class BookDaoTest {
     public void addWithRefIntegrityException(){
 
         Book book = new Book();
-        book.setTitle("testBook");
         book.setIsbn("TEST6578");
-        book.setPrice(new BigDecimal("21.95"));
         book.setPublishDate(LocalDate.of(2010, 8, 5));
         book.setAuthorID(22);
+        book.setTitle("testBook");
         book.setPublisherID(34);
+        book.setPrice(new BigDecimal("21.95"));
 
         book = bookDao.addBook(book);
 
@@ -141,22 +151,24 @@ public class BookDaoTest {
         publisher = publisherDao.addPublisher(publisher);
 
         //add first book
+
         Book book = new Book();
-        book.setTitle("testBook");
         book.setIsbn("TEST6578");
-        book.setPrice(new BigDecimal("21.95"));
         book.setPublishDate(LocalDate.of(2010, 8, 5));
         book.setAuthorID(author.getAuthorID());
+        book.setTitle("testBook");
         book.setPublisherID(publisher.getId());
+        book.setPrice(new BigDecimal("21.95"));
+
         book = bookDao.addBook(book);
 
         //add second book
         book = new Book();
-        book.setTitle("testBook20");
         book.setIsbn("TEST6578-22");
-        book.setPrice(new BigDecimal("30.95"));
         book.setPublishDate(LocalDate.of(2012, 9, 9));
         book.setAuthorID(author.getAuthorID());
+        book.setTitle("testBook20");
+        book.setPrice(new BigDecimal("30.95"));
         book.setPublisherID(publisher.getId());
         book = bookDao.addBook(book);
 
@@ -246,12 +258,13 @@ public class BookDaoTest {
 
         //add first book
         Book book = new Book();
-        book.setTitle("testBook");
         book.setIsbn("TEST6578");
-        book.setPrice(new BigDecimal("21.95"));
         book.setPublishDate(LocalDate.of(2010, 8, 5));
         book.setAuthorID(author.getAuthorID());
+        book.setTitle("testBook");
         book.setPublisherID(publisher.getId());
+        book.setPrice(new BigDecimal("21.95"));
+
         book = bookDao.addBook(book);
 
 

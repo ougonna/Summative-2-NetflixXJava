@@ -16,7 +16,7 @@ public class BookDaoJdbcTemplateImpl implements BookDao
 
     // Prepared statement strings
     private static final String INSERT_BOOK_SQL =
-            "insert into book (book_id, isbn, publish_date, author_id, title, publisher_id, price) values (?, ?, ?, ?, ?, ?, ?)";
+            "insert into book (isbn, publish_date, author_id, title, publisher_id, price) values (?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_BOOK_SQL =
             "select * from book where book_id = ?";

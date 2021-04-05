@@ -20,13 +20,13 @@ public class AuthorDaoJdbcTemplateImpl implements AuthorDao{
                     "values (?, ?, ?, ?, ?, ?, ? ,?)";
 
     private static final String SELECT_AUTHOR_SQL =
-            "select * from author where id = ?";
+            "select * from author where author_id = ?";
 
     private static final String SELECT_ALL_AUTHOR_SQL =
             "select * from author";
 
     private static final String DELETE_AUTHOR_SQL =
-            "delete from author where id = ?";
+            "delete from author where author_id = ?";
 
     private static final String UPDATE_AUTHOR_SQL =
             "update author set first_name = ?, last_name = ?, street = ?, city = ?, state = ?, " +
