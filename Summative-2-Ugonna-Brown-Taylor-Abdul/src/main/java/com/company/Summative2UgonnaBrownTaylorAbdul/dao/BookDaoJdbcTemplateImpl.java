@@ -30,10 +30,10 @@ public class BookDaoJdbcTemplateImpl implements BookDao
             "delete from book where book_id = ?";
 
     private static final String UPDATE_BOOK_SQL =
-            "update book set publish_date = ?, isbn = ?, author_id = ?, title = ?, publisher_id = ?, price = ?";
+            "update book set publish_date = ?, isbn = ?, author_id = ?, title = ?, publisher_id = ?, price = ? where book_id = ?";
 
-    private static final String SELECT_BOOKS_BY_MAKE_SQL =
-            "select * from book where author_id = ?";
+    private static final String SELECT_BOOKS_BY_AUTHOR_SQL =
+            "select * from book join author on book.author_id = author.author_id where author.first_name = ?";
 
 
     private JdbcTemplate jdbcTemplate;
@@ -93,7 +93,8 @@ public class BookDaoJdbcTemplateImpl implements BookDao
                 book.getAuthorID(),
                 book.getTitle(),
                 book.getPublisherID(),
-                book.getPrice());
+                book.getPrice(),
+                book.getBookID());
 
     }
     @Override
@@ -101,11 +102,11 @@ public class BookDaoJdbcTemplateImpl implements BookDao
     {
         jdbcTemplate.update(DELETE_BOOK_SQL, bookID);
     }
- //public List <Book> getBooksByAuthor(String author)
+
     @Override
-    public List <Book> getBooksByAuthor(int authorID)
+    public List <Book> getBooksByAuthor(String author)
     {
-        return jdbcTemplate.query(SELECT_BOOKS_BY_MAKE_SQL, this::mapRowToBook, authorID);
+        return jdbcTemplate.query(SELECT_BOOKS_BY_AUTHOR_SQL, this::mapRowToBook, author);
     }
 
 

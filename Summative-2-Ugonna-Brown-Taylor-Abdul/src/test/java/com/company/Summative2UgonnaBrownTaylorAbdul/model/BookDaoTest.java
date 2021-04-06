@@ -185,7 +185,7 @@ public class BookDaoTest {
         author = authorDao.addAuthor(author);
 
         Publisher publisher = new Publisher();
-        publisher.setName("PublisherTest");
+        publisher.setName("PublisherTest2");
         publisher.setEmail("publish@gmail.com");
         publisher.setStreet("Test street");
         publisher.setPhone("4473347877");
@@ -214,12 +214,11 @@ public class BookDaoTest {
         book.setPublisherID(publisher.getId());
         book = bookDao.addBook(book);
 
-        //Act
-        bookDao.addBook(book);
-       // List<Book> bList = bookDao.getBooksByAuthor("PublisherTest");
+
+        List<Book> bList = bookDao.getBooksByAuthor("UpdateName");
 
         //Assert
-        //assertEquals(bList.size(), 2);
+        assertEquals(bList.size(), 2);
 
     }
 

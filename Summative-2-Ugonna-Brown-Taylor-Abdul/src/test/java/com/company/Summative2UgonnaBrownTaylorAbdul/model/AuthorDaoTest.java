@@ -36,16 +36,16 @@ public class AuthorDaoTest {
             authorDao.deleteAuthor(a.getAuthorID());
         }
 
-//        List<Publisher> pList = publisherDao.getAllPublishers();
-//        for (Publisher p : pList) {
-//            publisherDao.deletePublisher(p.getId());
-//        }
-//
-//        List<Book> dList = bookDao.getAllBooks();
-//
-//        for (Book d : dList) {
-//            bookDao.deleteBook(d.getBookID());
-//        }
+        List<Publisher> pList = publisherDao.getAllPublishers();
+        for (Publisher p : pList) {
+            publisherDao.deletePublisher(p.getId());
+        }
+
+        List<Book> dList = bookDao.getAllBooks();
+
+        for (Book d : dList) {
+            bookDao.deleteBook(d.getBookID());
+        }
 
     }
 

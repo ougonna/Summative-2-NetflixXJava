@@ -30,7 +30,7 @@ public class AuthorDaoJdbcTemplateImpl implements AuthorDao{
 
     private static final String UPDATE_AUTHOR_SQL =
             "update author set first_name = ?, last_name = ?, street = ?, city = ?, state = ?, " +
-                    "postal_code = ?, phone = ?, email = ?" ;
+                    "postal_code = ?, phone = ?, email = ? where author_id = ?" ;
 
 
     private final JdbcTemplate jdbcTemplate;
@@ -89,7 +89,8 @@ public class AuthorDaoJdbcTemplateImpl implements AuthorDao{
                 author.getState(),
                 author.getPostalCode(),
                 author.getPhone(),
-                author.getEmail());
+                author.getEmail(),
+                author.getAuthorID());
 
     }
 

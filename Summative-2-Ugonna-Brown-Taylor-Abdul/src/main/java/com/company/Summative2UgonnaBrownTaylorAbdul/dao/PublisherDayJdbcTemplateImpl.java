@@ -29,7 +29,7 @@ public class PublisherDayJdbcTemplateImpl implements PublisherDao{
             "select * from publisher";
 
     private static final String UPDATE_PUBLISHER_SQL =
-            "update publisher set name = ?, street = ?, city = ?, state = ?, postal_code = ?, phone = ?, email = ?";
+            "update publisher set name = ?, street = ?, city = ?, state = ?, postal_code = ?, phone = ?, email = ? where publisher_id = ?";
 
     private static final String DELETE_PUBLISHER_SQL =
             "delete from publisher where publisher_id =  ?";
@@ -92,7 +92,8 @@ public class PublisherDayJdbcTemplateImpl implements PublisherDao{
                 publisher.getState(),
                 publisher.getPostalCode(),
                 publisher.getPhone(),
-                publisher.getEmail());
+                publisher.getEmail(),
+                publisher.getId());
     }
 
     @Override
