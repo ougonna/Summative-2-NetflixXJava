@@ -52,14 +52,6 @@ public class BookDaoTest {
 
 
 
-
-
-
-
-
-
-
-
     }
 
     @Test
@@ -88,7 +80,7 @@ public class BookDaoTest {
         publisher = publisherDao.addPublisher(publisher);
 
         Book book = new Book();
-        book.setIsbn("TEST6578");
+        book.setIsbn("TEST6579");
         book.setPublishDate(LocalDate.of(2010, 8, 5));
         book.setAuthorID(author.getAuthorID());
         book.setTitle("testBook");
@@ -114,7 +106,7 @@ public class BookDaoTest {
     public void addWithRefIntegrityException(){
 
         Book book = new Book();
-        book.setIsbn("TEST6578");
+        book.setIsbn("TEST65710");
         book.setPublishDate(LocalDate.of(2010, 8, 5));
         book.setAuthorID(22);
         book.setTitle("testBook");
@@ -153,7 +145,7 @@ public class BookDaoTest {
         //add first book
 
         Book book = new Book();
-        book.setIsbn("TEST6578");
+        book.setIsbn("TEST65720");
         book.setPublishDate(LocalDate.of(2010, 8, 5));
         book.setAuthorID(author.getAuthorID());
         book.setTitle("testBook");

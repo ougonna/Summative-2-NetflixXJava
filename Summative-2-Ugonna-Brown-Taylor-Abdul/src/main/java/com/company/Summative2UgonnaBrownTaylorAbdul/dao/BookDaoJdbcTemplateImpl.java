@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,15 +30,13 @@ public class BookDaoJdbcTemplateImpl implements BookDao
             "delete from book where book_id = ?";
 
     private static final String UPDATE_BOOK_SQL =
-            "update book set publish_date = ?, isbn = ?, author_id = ?, title = ?, publisher_id = ?, price = ? where book_id = ?";
+            "update book set publish_date = ?, isbn = ?, author_id = ?, title = ?, publisher_id = ?, price = ?";
 
     private static final String SELECT_BOOKS_BY_MAKE_SQL =
             "select * from book where author_id = ?";
 
 
     private JdbcTemplate jdbcTemplate;
-
-
 
     @Autowired
     public BookDaoJdbcTemplateImpl (JdbcTemplate jdbcTemplate)
@@ -46,7 +46,25 @@ public class BookDaoJdbcTemplateImpl implements BookDao
 
 
 
+    @Override
+    @Transactional
+    public Book addBook(Book book)
+    {
+        jdbcTemplate.update(INSERT_BOOK_SQL,
+                //book.getPublishDate(),
+                book.getIsbn(),
+                book.getPublishDate().toString(),
+                book.getAuthorID(),
+                book.getTitle(),
+                book.getPublisherID(),
+                book.getPrice());
 
+        int bookID = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
+        book.setBookID(bookID);
+        return book;
+    }
+
+    @Override
     public Book getBook(int bookID)
     {
         try
@@ -59,41 +77,32 @@ public class BookDaoJdbcTemplateImpl implements BookDao
         }
     }
 
+    @Override
     public List<Book> getAllBooks()
     {
         return jdbcTemplate.query(SELECT_ALL_BOOKS_SQL, this::mapRowToBook);
     }
 
-    public Book addBook(Book book)
-    {
-        jdbcTemplate.update(INSERT_BOOK_SQL,
-                book.getPublishDate(),
-                book.getIsbn(),
-                book.getAuthorID(),
-                book.getPublisherID(),
-                book.getPrice(),
-                book.getTitle());
-        int bookID = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
-        book.setBookID(bookID);
-        return book;
-    }
-
+    @Override
     public void updateBook(Book book)
     {
         jdbcTemplate.update(UPDATE_BOOK_SQL,
-                book.getPublishDate(),
+                //book.getPublishDate(),
+                Date.valueOf(book.getPublishDate()),
                 book.getIsbn(),
                 book.getAuthorID(),
+                book.getTitle(),
                 book.getPublisherID(),
-                book.getPrice(),
-                book.getTitle());
-    }
+                book.getPrice());
 
+    }
+    @Override
     public void deleteBook(int bookID)
     {
         jdbcTemplate.update(DELETE_BOOK_SQL, bookID);
     }
  //public List <Book> getBooksByAuthor(String author)
+    @Override
     public List <Book> getBooksByAuthor(int authorID)
     {
         return jdbcTemplate.query(SELECT_BOOKS_BY_MAKE_SQL, this::mapRowToBook, authorID);

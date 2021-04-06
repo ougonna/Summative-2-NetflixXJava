@@ -84,6 +84,7 @@ public class Book
         return bookID == book.bookID && authorID == book.authorID && publisherID == book.publisherID && Objects.equals(isbn, book.isbn) && Objects.equals(publishDate, book.publishDate) && Objects.equals(title, book.title) && Objects.equals(price, book.price);
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(bookID, isbn, publishDate, authorID, title, publisherID, price);
