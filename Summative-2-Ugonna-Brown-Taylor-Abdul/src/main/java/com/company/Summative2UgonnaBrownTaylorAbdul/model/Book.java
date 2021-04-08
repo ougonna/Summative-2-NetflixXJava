@@ -74,19 +74,19 @@ public class Book
         this.price = price;
     }
 
-    //Equals and HashCode
 
+    //Equals and HashCode
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return bookID == book.bookID && authorID == book.authorID && publisherID == book.publisherID && Objects.equals(isbn, book.isbn) && Objects.equals(publishDate, book.publishDate) && Objects.equals(title, book.title) && Objects.equals(price, book.price);
+        return getBookID() == book.getBookID() && getAuthorID() == book.getAuthorID() && getPublisherID() == book.getPublisherID() && Objects.equals(getIsbn(), book.getIsbn()) && Objects.equals(getPublishDate(), book.getPublishDate()) && Objects.equals(getTitle(), book.getTitle()) && Objects.equals(getPrice(), book.getPrice());
     }
-
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookID, isbn, publishDate, authorID, title, publisherID, price);
+        return Objects.hash(getBookID(), getIsbn(), getPublishDate(), getAuthorID(), getTitle(), getPublisherID(), getPrice());
     }
+
 }

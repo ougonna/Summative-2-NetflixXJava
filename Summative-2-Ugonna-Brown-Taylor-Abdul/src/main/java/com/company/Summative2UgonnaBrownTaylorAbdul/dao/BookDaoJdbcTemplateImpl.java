@@ -87,7 +87,6 @@ public class BookDaoJdbcTemplateImpl implements BookDao
     public void updateBook(Book book)
     {
         jdbcTemplate.update(UPDATE_BOOK_SQL,
-                //book.getPublishDate(),
                 Date.valueOf(book.getPublishDate()),
                 book.getIsbn(),
                 book.getAuthorID(),

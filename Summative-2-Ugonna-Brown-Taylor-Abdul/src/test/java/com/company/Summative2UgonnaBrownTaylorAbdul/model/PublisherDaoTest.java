@@ -89,6 +89,7 @@ public class PublisherDaoTest {
         publisher.setPostalCode("33456");
         publisher = publisherDao.addPublisher(publisher);
 
+        //Adds second publisher
         publisher = new Publisher();
         publisher.setName("PublisherTest2");
         publisher.setEmail("publish2@gmail.com");

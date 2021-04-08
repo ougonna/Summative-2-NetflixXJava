@@ -82,7 +82,7 @@ public class AuthorDaoTest {
     @Test
     public void getALlAuthors(){
 
-        //Arrange: arranging first Authors
+        //Arrange: arranging first Author
         Author auth = new Author();
         auth.setFirstName("BookSecond");
         auth.setLastName("BookSecondLast");
@@ -96,7 +96,7 @@ public class AuthorDaoTest {
         //Act
         authorDao.addAuthor(auth);
 
-        //Arrange: Arrange second motorcycle
+        //Arrange: Arrange second author
         auth = new Author();
         auth.setFirstName("BookFirstLast");
         auth.setLastName("BookLastLast");
@@ -143,8 +143,8 @@ public class AuthorDaoTest {
 
         //Act
         authorDao.updateAuthor(auth); //updates db with new information
-        Author auth2 = authorDao.getAuthor(auth.getAuthorID()); //creates another motorcycle
-                                                          //gets id of the motorcycle created above and assign to auth2
+        Author auth2 = authorDao.getAuthor(auth.getAuthorID()); //creates another author
+                                                          //gets id of the author created above and assign to auth2
 
         //Assert
         assertEquals(auth2, auth);

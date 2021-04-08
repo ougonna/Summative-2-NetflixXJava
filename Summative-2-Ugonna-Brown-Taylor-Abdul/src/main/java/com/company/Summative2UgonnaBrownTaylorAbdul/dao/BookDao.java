@@ -16,6 +16,5 @@ public interface BookDao
 
     void deleteBook(int bookID);
 
-    //List <Book> getBooksByAuthor(int authorID);
     List <Book> getBooksByAuthor(String author);
 }
